@@ -1,1 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filosofisopi - Tea & Pastry</title>
+    <style>
+        /* Palet Warna & Tipografi */
+        :root {
+            --bg-color: #FDFBF7; /* Warna latar krem dari logo */
+            --primary-color: #4A5D23; /* Hijau zaitun dari garis logo */
+            --text-color: #333333;
+            --accent-color: #8B5A2B; /* Cokelat hangat */
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Navigasi */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(74, 93, 35, 0.2);
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: var(--accent-color);
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Kategori Produk (Grid 1:1) */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            padding: 40px 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Tempat Gambar Resolusi 1:1 */
+        .image-container {
+            width: 100%;
+            aspect-ratio: 1 / 1; /* Mengunci rasio 1:1 */
+            background-color: #eaddd0; /* Warna placeholder */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Memastikan gambar memenuhi kotak tanpa distorsi */
+        }
+
+        .product-info {
+            padding: 25px 20px;
+        }
+
+        .product-info h3 {
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+            font-size: 1.5rem;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-inquiry {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .btn-inquiry:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--primary-color);
+            color: #fff;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>filosofisopi</h1>
+        <p>Tea & Pastry • ソピの哲学</p>
+    </header>
+
+    <section class="hero">
+        <h2>Filosofi dalam Setiap Seduhan dan Gigitan</h2>
+        <p>Temukan ketenangan melalui kurasi Matcha otentik dan Pastry artisanal kami. Dibuat dengan penuh kesadaran (mindfulness) untuk menemani momen berharga Anda atau sebagai bingkisan istimewa untuk orang tersayang.</p>
+    </section>
+
+    <section class="products">
+        <div class="product-card">
+            <div class="image-container">
+                <img src="placeholder-matcha.jpg" alt="Matcha Latte" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'color:#8B5A2B\'>Foto Matcha Latte (1:1)</span>'">
+            </div>
+            <div class="product-info">
+                <h3>Matcha Latte</h3>
+                <p>Kombinasi sempurna dari bubuk matcha seremonial pilihan dengan kelembutan susu murni. Menghadirkan keseimbangan rasa *umami* dan manis yang menenangkan di setiap tegukan.</p>
+                <a href="#kontak" class="btn-inquiry">Tanya Detail</a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <img src="placeholder-pastry.jpg" alt="Artisanal Pastry" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'color:#8B5A2B\'>Foto Pastry (1:1)</span>'">
+            </div>
+            <div class="product-info">
+                <h3>Artisanal Pastry</h3>
+                <p>Dipanggang segar setiap pagi dengan bahan premium. Roti dan kue kering dengan tekstur renyah di luar dan lembut di dalam, pasangan sempurna untuk teh Anda.</p>
+                <a href="#kontak" class="btn-inquiry">Tanya Detail</a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <img src="placeholder-gift.jpg" alt="Gift Bundle" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'color:#8B5A2B\'>Foto Gift Bundle (1:1)</span>'">
+            </div>
+            <div class="product-info">
+                <h3>Gift Bundle</h3>
+                <p>Hantaran elegan yang dikurasi secara personal. Berisi pilihan teh dan pastry terbaik kami, dibungkus cantik untuk merayakan momen spesial bersama orang terdekat.</p>
+                <a href="#kontak" class="btn-inquiry">Tanya Detail</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="kontak">
+        <p>&copy; 2026 Filosofisopi. All Rights Reserved.</p>
+        <p>Untuk pemesanan dan ketersediaan, silakan hubungi kami via WhatsApp atau Instagram.</p>
+    </footer>
+
+</body>
+</html>
