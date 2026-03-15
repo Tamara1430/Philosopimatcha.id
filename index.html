@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filosofisopi - Tea & Pastry</title>
     <style>
+        /* Palet Warna Berdasarkan Logo */
         :root {
-            --bg-color: #FDFBF7;
-            --primary-color: #4A5D23;
-            --accent-color: #8B5A2B;
+            --bg-color: #FDFBF7; /* Krem hangat sesuai latar logo */
+            --primary-color: #4A5D23; /* Hijau zaitun dari garis logo */
+            --accent-color: #8B5A2B; /* Cokelat kayu artisanal */
             --white: #ffffff;
+            --text-dark: #2d3321;
         }
 
         * { box-sizing: border-box; }
@@ -19,9 +21,10 @@
             font-family: 'Georgia', serif; 
             background-color: var(--bg-color);
             scroll-behavior: smooth;
+            color: var(--text-dark);
         }
 
-        /* 1. HERO SECTION (Full Screen) */
+        /* 1. FULL PAGE HERO SECTION */
         .hero-full {
             height: 100vh;
             display: flex;
@@ -33,29 +36,37 @@
             padding: 20px;
         }
 
+        .hero-logo {
+            width: 250px; /* Ukuran logo di halaman depan */
+            height: auto;
+            margin-bottom: 20px;
+            animation: fadeInLogo 2s ease;
+        }
+
         .hero-full h1 {
-            font-size: clamp(3rem, 10vw, 5rem);
+            font-size: clamp(2rem, 8vw, 4rem);
             color: var(--primary-color);
             margin: 0;
-            letter-spacing: 5px;
+            letter-spacing: 6px;
+            font-weight: 400;
         }
 
         .hero-full p {
             font-style: italic;
             color: var(--accent-color);
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
         }
 
         .scroll-down {
-            margin-top: 50px;
             text-decoration: none;
             color: var(--primary-color);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
             border: 1px solid var(--primary-color);
-            padding: 10px 20px;
-            transition: 0.3s;
+            padding: 12px 30px;
+            transition: 0.4s;
         }
 
         .scroll-down:hover {
@@ -70,10 +81,18 @@
             background: var(--bg-color);
             display: flex;
             justify-content: center;
-            padding: 20px;
-            gap: 20px;
-            z-index: 100;
+            align-items: center;
+            padding: 15px 20px;
+            gap: 30px;
+            z-index: 1000;
             border-bottom: 1px solid rgba(74, 93, 35, 0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .nav-logo {
+            height: 40px; /* Ukuran logo kecil di navbar */
+            width: auto;
+            margin-right: 20px;
         }
 
         .nav-btn {
@@ -84,32 +103,36 @@
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 1px;
-            padding: 5px 10px;
+            padding: 10px 0;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            transition: 0.3s;
         }
 
         .nav-btn.active {
-            border-bottom: 2px solid var(--accent-color);
-            color: var(--accent-color);
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            opacity: 1;
         }
 
         /* 3. CONTENT AREA */
         .category-container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 40px 20px;
-            display: none; /* Hidden by default */
+            padding: 80px 20px;
+            display: none; /* Tersembunyi otomatis */
         }
 
         .category-container.active {
             display: block;
-            animation: fadeIn 0.8s ease;
+            animation: slideUp 0.8s ease;
         }
 
         /* Deskripsi General */
         .category-desc {
             text-align: center;
             margin-bottom: 60px;
-            max-width: 700px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -117,32 +140,39 @@
         .category-desc h2 {
             font-size: 2.5rem;
             color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 400;
         }
 
         .category-desc p {
             font-size: 1.1rem;
             line-height: 1.8;
             color: #555;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        /* Grid Produk 1:1 */
+        /* Grid Produk (Rasio 1:1) */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 40px;
         }
 
         .card {
             background: var(--white);
-            border-radius: 8px;
+            border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
         }
 
         .img-box {
             width: 100%;
-            aspect-ratio: 1/1;
-            background: #eee;
+            aspect-ratio: 1/1; /* Kunci 1:1 */
+            background: #f0f0f0;
             overflow: hidden;
         }
 
@@ -153,42 +183,79 @@
         }
 
         .info {
-            padding: 20px;
+            padding: 25px;
             text-align: center;
         }
 
-        .info h3 { color: var(--primary-color); margin: 0 0 10px; }
-        .info p { font-size: 0.9rem; color: #777; margin-bottom: 15px; }
+        .info h3 { 
+            color: var(--primary-color); 
+            margin: 0 0 10px; 
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .info p { 
+            font-size: 0.9rem; 
+            color: #777; 
+            margin-bottom: 20px;
+            font-family: 'Segoe UI', sans-serif;
+        }
 
         .btn-wa {
             display: inline-block;
-            padding: 8px 15px;
+            padding: 10px 20px;
             border: 1px solid var(--primary-color);
             color: var(--primary-color);
             text-decoration: none;
-            font-size: 0.8rem;
-            border-radius: 4px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.3s;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        .btn-wa:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Animasi */
+        @keyframes fadeInLogo {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        footer { text-align: center; padding: 50px; color: var(--primary-color); opacity: 0.6; }
+        footer { 
+            text-align: center; 
+            padding: 60px; 
+            background: #f4f1ea;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .navbar { flex-wrap: wrap; gap: 15px; }
+            .nav-logo { display: none; } /* Sembunyikan logo kecil di hp agar muat */
+        }
     </style>
 </head>
 <body>
 
     <section class="hero-full">
-        <p>Filosofi dalam setiap langkah</p>
+        <img src="/asset/logo.jpeg" alt="Logo Filosofisopi" class="hero-logo">
+        <p>MEMAKNAI SETIAP SEDUHAN</p>
         <h1>filosofisopi</h1>
-        <p>ソピの哲学 • Tea & Pastry</p>
-        <a href="#menu" class="scroll-down" onclick="showCategory('matcha')">JELAJAHI MENU</a>
+        <p>Tea & Pastry • ソピの哲学</p>
+        <a href="#menu" class="scroll-down" onclick="showCategory('matcha', document.getElementById('btn-default'))">LIHAT KOLEKSI</a>
     </section>
 
     <nav class="navbar" id="menu">
-        <button class="nav-btn active" onclick="showCategory('matcha', this)">Matcha Latte</button>
+        <img src="/asset/logo.jpeg" alt="Logo" class="nav-logo">
+        <button id="btn-default" class="nav-btn active" onclick="showCategory('matcha', this)">Matcha Latte</button>
         <button class="nav-btn" onclick="showCategory('pastry', this)">Pastry</button>
         <button class="nav-btn" onclick="showCategory('gift', this)">Gift Bundle</button>
     </nav>
@@ -196,28 +263,28 @@
     <div id="matcha" class="category-container active">
         <div class="category-desc">
             <h2>The Art of Matcha</h2>
-            <p>Kami menghadirkan Matcha seremonial grade yang didatangkan langsung dari perkebunan terbaik di Uji, Jepang. Setiap cangkir adalah keseimbangan antara ketenangan dan energi alami, disiapkan dengan teknik tradisional untuk menjaga kemurnian rasa umami.</p>
+            <p>Dibuat dari daun teh hijau pilihan yang digiling halus menggunakan batu (stone-ground) di Uji, Jepang. Matcha kami menawarkan profil rasa umami yang dalam, warna hijau zamrud yang pekat, dan ketenangan di setiap tegukan.</p>
         </div>
         <div class="product-grid">
             <div class="card">
-                <div class="img-box"><img src="matcha1.jpg" alt="Classic" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Classic Uji Matcha</h3><p>Rasa otentik dengan tekstur lembut dan aroma yang menenangkan.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="matcha-1.jpg" alt="Matcha" onerror="this.src='https://via.placeholder.com/500?text=Matcha+1'"></div>
+                <div class="info"><h3>Ceremonial Matcha</h3><p>Matcha murni tanpa pemanis untuk penikmat teh sejati.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
             <div class="card">
-                <div class="img-box"><img src="matcha2.jpg" alt="Oat" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Oatmilk Matcha</h3><p>Paduan gurih susu gandum dan matcha premium.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="matcha-2.jpg" alt="Matcha" onerror="this.src='https://via.placeholder.com/500?text=Matcha+2'"></div>
+                <div class="info"><h3>Cloudy Matcha Latte</h3><p>Matcha creamy dengan foam susu yang sangat lembut.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
             <div class="card">
-                <div class="img-box"><img src="matcha3.jpg" alt="Rose" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Rose Matcha Latte</h3><p>Sentuhan aromatik kelopak bunga mawar dalam seduhan matcha.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="matcha-3.jpg" alt="Matcha" onerror="this.src='https://via.placeholder.com/500?text=Matcha+3'"></div>
+                <div class="info"><h3>Iced Strawberry Matcha</h3><p>Perpaduan puree stroberi segar dan matcha premium.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
             <div class="card">
-                <div class="img-box"><img src="matcha4.jpg" alt="Cold" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Iced Matcha Cloud</h3><p>Matcha dingin dengan foam susu yang tebal dan lembut di atasnya.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="matcha-4.jpg" alt="Matcha" onerror="this.src='https://via.placeholder.com/500?text=Matcha+4'"></div>
+                <div class="info"><h3>Oatmilk Matcha</h3><p>Pilihan plant-based yang menonjolkan rasa kacang dan teh.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
             <div class="card">
-                <div class="img-box"><img src="matcha5.jpg" alt="Zest" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Matcha Citrus Zest</h3><p>Kombinasi unik matcha dengan kesegaran jeruk lemon asli.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="matcha-5.jpg" alt="Matcha" onerror="this.src='https://via.placeholder.com/500?text=Matcha+5'"></div>
+                <div class="info"><h3>Dirty Espresso Matcha</h3><p>Kombinasi energi kafein kopi dan ketenangan matcha.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
         </div>
     </div>
@@ -225,63 +292,65 @@
     <div id="pastry" class="category-container">
         <div class="category-desc">
             <h2>Artisanal Pastry</h2>
-            <p>Setiap adonan kami melewati proses fermentasi panjang untuk menghasilkan tekstur yang sempurna. Menggunakan mentega pilihan dan sentuhan matcha premium, setiap gigitan adalah perpaduan tradisi baking Perancis dengan rasa Timur yang elegan.</p>
+            <p>Setiap pastry kami dipanggang dalam batch kecil untuk memastikan kualitas. Kami menggunakan mentega premium dan teknik lipatan tradisional Perancis untuk menghasilkan lapisan yang renyah dan aroma yang menggugah selera.</p>
         </div>
         <div class="product-grid">
             <div class="card">
-                <div class="img-box"><img src="pastry1.jpg" alt="Croissant" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Matcha Almond Croissant</h3><p>Lapisan renyah dengan isian matcha yang melimpah.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="p1.jpg" alt="Pastry" onerror="this.src='https://via.placeholder.com/500?text=Pastry+1'"></div>
+                <div class="info"><h3>Matcha Croissant</h3><p>Lapisan renyah dengan isian cream matcha yang melimpah.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
             <div class="card">
-                <div class="img-box"><img src="pastry2.jpg" alt="Basque" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Matcha Basque Cheesecake</h3><p>Cheesecake lumer dengan aroma panggangan yang khas.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="p2.jpg" alt="Pastry" onerror="this.src='https://via.placeholder.com/500?text=Pastry+2'"></div>
+                <div class="info"><h3>Matcha Basque Cheesecake</h3><p>Tekstur lumer yang berpadu dengan kepahitan matcha.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
             <div class="card">
-                <div class="img-box"><img src="pastry3.jpg" alt="Scone" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Matcha White Choc Scone</h3><p>Pasangan sempurna untuk minum teh sore Anda.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="p3.jpg" alt="Pastry" onerror="this.src='https://via.placeholder.com/500?text=Pastry+3'"></div>
+                <div class="info"><h3>Matcha Pain au Chocolat</h3><p>Pastry cokelat klasik dengan sentuhan matcha di adonannya.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
             <div class="card">
-                <div class="img-box"><img src="pastry4.jpg" alt="Brownie" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Fudgy Matcha Blondie</h3><p>Cokelat putih dan matcha dalam tekstur padat nan lembut.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="p4.jpg" alt="Pastry" onerror="this.src='https://via.placeholder.com/500?text=Pastry+4'"></div>
+                <div class="info"><h3>Uji Matcha Scone</h3><p>Kudapan padat yang sangat cocok dicelup ke dalam teh hangat.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
             <div class="card">
-                <div class="img-box"><img src="pastry5.jpg" alt="Cube" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Matcha Cream Cube</h3><p>Roti berbentuk kubus dengan isian vla matcha yang dingin.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="p5.jpg" alt="Pastry" onerror="this.src='https://via.placeholder.com/500?text=Pastry+5'"></div>
+                <div class="info"><h3>Matcha Muffin</h3><p>Lembut di dalam dengan taburan crumble matcha di atasnya.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
         </div>
     </div>
 
     <div id="gift" class="category-container">
         <div class="category-desc">
-            <h2>The Gift of Zen</h2>
-            <p>Berikan lebih dari sekadar hadiah. Kurasi Gift Bundle kami dirancang untuk memberikan pengalaman minum teh yang lengkap di rumah. Dikemas secara estetik dengan material ramah lingkungan, cocok untuk mereka yang menghargai ketenangan.</p>
+            <h2>Hantaran Filosofisopi</h2>
+            <p>Kurasi paket istimewa untuk orang tersayang. Setiap bingkisan dikemas secara manual dengan sentuhan personal, merangkum kehangatan Filosofisopi dalam satu kotak elegan.</p>
         </div>
         <div class="product-grid">
             <div class="card">
-                <div class="img-box"><img src="gift1.jpg" alt="Zen" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Zen Starter Set</h3><p>Lengkap dengan Chasen, Chawan, dan Matcha pilihan.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="g1.jpg" alt="Gift" onerror="this.src='https://via.placeholder.com/500?text=Gift+1'"></div>
+                <div class="info"><h3>Matcha Starter Kit</h3><p>Satu set alat seduh tradisional untuk pemula.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
             <div class="card">
-                <div class="img-box"><img src="gift2.jpg" alt="MeTime" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Morning Me-Time Box</h3><p>Paket matcha botolan dan 2 varian croissant pilihan.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="g2.jpg" alt="Gift" onerror="this.src='https://via.placeholder.com/500?text=Gift+2'"></div>
+                <div class="info"><h3>The Weekend Bundle</h3><p>Koleksi 4 pastry dan 2 botol matcha latte siap minum.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
             <div class="card">
-                <div class="img-box"><img src="gift3.jpg" alt="Hampers" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Signature Hamper</h3><p>Koleksi lengkap seluruh varian pastry matcha dalam box kayu.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="g3.jpg" alt="Gift" onerror="this.src='https://via.placeholder.com/500?text=Gift+3'"></div>
+                <div class="info"><h3>Signature Hampers</h3><p>Kotak kayu eksklusif berisi seluruh varian teh premium.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
             <div class="card">
-                <div class="img-box"><img src="gift4.jpg" alt="Daily" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Matcha Daily Dose</h3><p>Bundle 5 botol matcha latte untuk stok seminggu.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="g4.jpg" alt="Gift" onerror="this.src='https://via.placeholder.com/500?text=Gift+4'"></div>
+                <div class="info"><h3>Afternoon Tea Set</h3><p>Kombinasi scone, selai, dan teh hijau loose-leaf.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
             <div class="card">
-                <div class="img-box"><img src="gift5.jpg" alt="Ceremony" onerror="this.style.display='none'"></div>
-                <div class="info"><h3>Ceremonial Gift Set</h3><p>Hanya untuk penikmat matcha sejati dengan grade tertinggi.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
+                <div class="img-box"><img src="g5.jpg" alt="Gift" onerror="this.src='https://via.placeholder.com/500?text=Gift+5'"></div>
+                <div class="info"><h3>Self-Care Box</h3><p>Matcha latte, lilin aroma terapi, dan kue kering matcha.</p><a href="#" class="btn-wa">Tanya Detail</a></div>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Filosofisopi. Keanggunan dalam kesederhanaan.</p>
+        <img src="/asset/logo.jpeg" alt="Logo" style="height: 60px; margin-bottom: 20px; opacity: 0.5;">
+        <p>Filosofisopi • Merayakan Ketenangan Melalui Rasa.</p>
+        <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.6;">&copy; 2026 Filosofisopi. All Rights Reserved.</p>
     </footer>
 
     <script>
@@ -290,15 +359,22 @@
             const categories = document.querySelectorAll('.category-container');
             categories.forEach(cat => cat.classList.remove('active'));
 
-            // Hapus status active di semua tombol navbar
+            // Hapus status active di navbar
             const buttons = document.querySelectorAll('.nav-btn');
             buttons.forEach(b => b.classList.remove('active'));
 
             // Tampilkan kategori yang dipilih
-            document.getElementById(id).classList.add('active');
+            const selected = document.getElementById(id);
+            selected.classList.add('active');
             
-            // Beri status active pada tombol yang diklik
+            // Tandai tombol yang aktif
             if(btn) btn.classList.add('active');
+
+            // Scroll ke posisi navbar agar konten terlihat jelas
+            window.scrollTo({
+                top: document.getElementById('menu').offsetTop,
+                behavior: 'smooth'
+            });
         }
     </script>
 </body>
